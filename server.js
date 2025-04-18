@@ -15,7 +15,7 @@ app.get("/", (req, res) => {
 });
 
 const corsOptions = {
-  origin: "*", // tu peux mettre "https://tonfrontend.vercel.app" plus tard
+  origin: "*", // remplace plus tard par ton frontend vercel
   credentials: true,
 };
 
@@ -24,12 +24,12 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 app.use("/api", routes);
 
-// ✅ Models
-require("./models/User");
+// ✅ Models & associations centralisées
+require("./models"); // ← gère User ↔ Vehicule
+
 require("./models/Entreprise");
 require("./models/Commande");
 require("./models/Document");
-require("./models/Vehicule");
 require("./models/Matching");
 require("./models/Litige");
 require("./models/Photo");
@@ -47,7 +47,7 @@ const PORT = process.env.PORT || 5000;
     await db.authenticate();
     console.log("✅ PostgreSQL connecté");
 
-    await db.sync({ force: true });
+    await db.sync({ alter: true }); // propre sans forcer
     console.log("✅ Tables synchronisées avec succès");
 
     app.listen(PORT, () => {

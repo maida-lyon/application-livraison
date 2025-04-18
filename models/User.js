@@ -2,24 +2,33 @@ const { DataTypes } = require("sequelize");
 const db = require("../config/db");
 
 const User = db.define("User", {
-  nom: DataTypes.STRING,
-  email: { type: DataTypes.STRING, unique: true },
-  telephone: DataTypes.STRING,
-  motdepasse: DataTypes.STRING,
-  adresse: DataTypes.STRING,
-  role: {
-    type: DataTypes.ENUM(
-      "admin",
-      "donneur",
-      "transporteur",
-      "manutentionnaire"
-    ),
+  nom: {
+    type: DataTypes.STRING,
     allowNull: false,
   },
-  statutEnLigne: {
-    type: DataTypes.BOOLEAN,
-    defaultValue: false,
+  email: {
+    type: DataTypes.STRING,
+    unique: true,
+    allowNull: false,
   },
+  telephone: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  motdepasse: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  role: {
+    type: DataTypes.ENUM("donneur", "transporteur", "admin"),
+    allowNull: false,
+  },
+});
+
+// Association avec Vehicule
+User.hasMany(require("./Vehicule"), {
+  foreignKey: "UserId",
+  onDelete: "CASCADE",
 });
 
 module.exports = User;
