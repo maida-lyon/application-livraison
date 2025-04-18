@@ -9,8 +9,13 @@ const routes = require("./routes");
 dotenv.config();
 const app = express();
 
+// ✅ Route test pour Render (évite 502)
+app.get("/", (req, res) => {
+  res.send("✅ DeliverApp backend is LIVE !");
+});
+
 const corsOptions = {
-  origin: "http://localhost:3002",
+  origin: "*", // tu peux mettre "https://tonfrontend.vercel.app" plus tard
   credentials: true,
 };
 
@@ -19,6 +24,7 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 app.use("/api", routes);
 
+// ✅ Models
 require("./models/User");
 require("./models/Entreprise");
 require("./models/Commande");
@@ -41,7 +47,7 @@ const PORT = process.env.PORT || 5000;
     await db.authenticate();
     console.log("✅ PostgreSQL connecté");
 
-    await db.sync({ alter: true });
+    await db.sync({ force: true });
     console.log("✅ Tables synchronisées avec succès");
 
     app.listen(PORT, () => {
