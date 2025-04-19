@@ -1,0 +1,180 @@
+===========================
+SCÉNARIO POSTMAN COMPLET
+Plateforme Application Livraison
+===========================
+
+⚙️  Base URL : http://localhost:5000/api
+
+------------------------------------------------------------
+1. Donneur d’ordre – INSCRIPTION
+------------------------------------------------------------
+POST /users
+
+{
+  "nom": "Alpha Client",
+  "email": "client@alpha.fr",
+  "telephone": "0601010101",
+  "adresse": "1 rue des Annonces, Lyon",
+  "role": "donneur",
+  "statutEnLigne": true
+}
+
+------------------------------------------------------------
+2. Transporteur – INSCRIPTION
+------------------------------------------------------------
+POST /users
+
+{
+  "nom": "Froid Express",
+  "email": "froid@transport.fr",
+  "telephone": "0620202020",
+  "adresse": "30 rue du Fret, Lyon",
+  "role": "transporteur",
+  "statutEnLigne": true
+}
+
+------------------------------------------------------------
+3. Véhicule Frigorifique – DÉCLARATION
+------------------------------------------------------------
+POST /vehicules
+
+{
+  "marque": "Iveco",
+  "modele": "FrigoBox",
+  "immatriculation": "FR-987-COL",
+  "type": "Fourgon",
+  "typologieVehicule": "camion frigorifique",
+  "volumeMax": 12,
+  "poidsMax": 1200,
+  "temperatureMin": -18,
+  "UserId": 2
+}
+
+------------------------------------------------------------
+4. Document – RC Pro VALIDÉ
+------------------------------------------------------------
+POST /documents
+
+{
+  "type": "RC Pro",
+  "url": "https://monlien/fichier.pdf",
+  "statut": "validé",
+  "UserId": 2
+}
+
+------------------------------------------------------------
+5. Commande FREIGHT avec manutentionnaire
+------------------------------------------------------------
+POST /commandes
+
+{
+  "type": "freight",
+  "adresseDepart": "1 rue des Annonces, Lyon",
+  "adresseArrivee": "12 avenue du Port, Marseille",
+  "poids": 850,
+  "volume": 8,
+  "typologieMarchandise": "camion frigorifique",
+  "temperatureMin": -18,
+  "statut": "en attente",
+  "UserId": 1
+}
+
+------------------------------------------------------------
+6. Commande DISTRIBUTION MESSAGERIE
+------------------------------------------------------------
+POST /commandes
+
+{
+  "type": "distribution",
+  "adresseDepart": "1 rue des Hubs, Lyon",
+  "adresseArrivee": "5 rue Client, Lyon 3",
+  "poids": 100,
+  "volume": 1,
+  "typologieMarchandise": "vélo cargo",
+  "temperatureMin": 4,
+  "statut": "en attente",
+  "UserId": 1
+}
+
+------------------------------------------------------------
+7. Matching intelligent (freight)
+------------------------------------------------------------
+POST /matchings/search
+
+{
+  "type": "freight",
+  "typologieMarchandise": "camion frigorifique",
+  "poids": 850,
+  "volume": 8,
+  "temperatureMin": -18
+}
+
+------------------------------------------------------------
+8. Génération de FACTURE
+------------------------------------------------------------
+POST /invoices/generate
+
+{
+  "user": "Alpha Client",
+  "montant": 280,
+  "description": "Mission Fret Lyon-Marseille"
+}
+
+------------------------------------------------------------
+9. Paiement SIMULÉ
+------------------------------------------------------------
+POST /paiements/execute
+
+{
+  "montant": 280
+}
+
+------------------------------------------------------------
+10. Mise à jour GPS TRANSPORTEUR
+------------------------------------------------------------
+POST /tracking/location
+
+{
+  "latitude": "45.76",
+  "longitude": "4.84",
+  "statut": "en livraison"
+}
+
+------------------------------------------------------------
+11. Suivi public mission
+------------------------------------------------------------
+GET /tracking/status/1234
+
+------------------------------------------------------------
+12. Photo – PREUVE LIVRAISON
+------------------------------------------------------------
+POST /photos
+
+{
+  "url": "https://monlien/photo-colis.jpg",
+  "description": "Colis livré intact"
+}
+
+------------------------------------------------------------
+13. Litige – DÉCLARATION
+------------------------------------------------------------
+POST /litiges
+
+{
+  "statut": "ouvert",
+  "raison": "Colis endommagé",
+  "description": "Carton abîmé à l'arrivée"
+}
+
+------------------------------------------------------------
+14. Chatbot – Assistant IA
+------------------------------------------------------------
+POST /chatbot
+
+{
+  "message": "Comment créer une commande ?"
+}
+
+===========================
+FIN DU SCÉNARIO GLOBAL
+===========================
