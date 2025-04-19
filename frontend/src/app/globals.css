@@ -1,0 +1,12 @@
+@import "leaflet/dist/leaflet.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Responsive éléments formulaire */
+input, select, textarea, button {
+  font-size: 1rem;
+  width: 100%;
+  margin-bottom: 1rem;
+}
