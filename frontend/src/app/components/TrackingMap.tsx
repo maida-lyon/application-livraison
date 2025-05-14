@@ -1,14 +1,18 @@
 'use client';
+
 import { useEffect, useState } from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 
-// ✅ Corriger bug Vercel (Leaflet icons)
+import markerIcon2x from 'leaflet/dist/images/marker-icon-2x.png';
+import markerIcon from 'leaflet/dist/images/marker-icon.png';
+import markerShadow from 'leaflet/dist/images/marker-shadow.png';
+
 L.Icon.Default.mergeOptions({
-  iconRetinaUrl: '/leaflet/images/marker-icon-2x.png',
-  iconUrl: '/leaflet/images/marker-icon.png',
-  shadowUrl: '/leaflet/images/marker-shadow.png',
+  iconRetinaUrl: markerIcon2x.src,
+  iconUrl: markerIcon.src,
+  shadowUrl: markerShadow.src,
 });
 
 export default function TrackingMap() {
@@ -24,13 +28,13 @@ export default function TrackingMap() {
 
   return (
     <MapContainer
-      center={[latitude, longitude] as [number, number]}
+      center={[latitude, longitude]}
       zoom={13}
       scrollWheelZoom={false}
       style={{ height: '400px', width: '100%' }}
     >
       <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-      <Marker position={[latitude, longitude] as [number, number]}>
+      <Marker position={[latitude, longitude]}>
         <Popup>Position actuelle</Popup>
       </Marker>
     </MapContainer>
