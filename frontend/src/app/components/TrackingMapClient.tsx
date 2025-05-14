@@ -1,4 +1,4 @@
-'use client';
+'use client'
 
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import { Icon } from 'leaflet';
@@ -7,12 +7,16 @@ import 'leaflet/dist/leaflet.css';
 const customIcon = new Icon({
   iconUrl: 'https://unpkg.com/leaflet@1.9.3/dist/images/marker-icon.png',
   iconSize: [25, 41],
+  iconAnchor: [12, 41],
+  popupAnchor: [1, -34],
+  shadowUrl: 'https://unpkg.com/leaflet@1.9.3/dist/images/marker-shadow.png',
+  shadowSize: [41, 41],
 });
 
-export default function TrackingMapClient({
+export default function TrackingMap({
   latitude = 45.75,
   longitude = 4.85,
-  statut = 'préparée',
+  statut = 'Préparée',
 }: {
   latitude?: number;
   longitude?: number;
@@ -32,7 +36,7 @@ export default function TrackingMapClient({
         />
         <Marker position={[latitude, longitude]} icon={customIcon}>
           <Popup>
-            Transporteur - Statut : <strong>{statut}</strong>
+            Transporteur – Statut : <strong>{statut}</strong>
           </Popup>
         </Marker>
       </MapContainer>
