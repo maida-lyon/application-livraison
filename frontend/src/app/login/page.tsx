@@ -1,14 +1,14 @@
 'use client';
-import { useState } from "react";
-import axios from "axios";
-import { useRouter } from "next/navigation";
+import { useState } from 'react';
+import axios from 'axios';
+import { useRouter } from 'next/navigation';
 
-const API = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
+const API = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
 
 export default function LoginPage() {
   const router = useRouter();
-  const [form, setForm] = useState({ email: "", motdepasse: "" });
-  const [message, setMessage] = useState("");
+  const [form, setForm] = useState({ email: '', motdepasse: '' });
+  const [message, setMessage] = useState('');
 
   const handleChange = (e: any) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -23,7 +23,7 @@ export default function LoginPage() {
       const { role } = res.data;
       router.push(`/dashboard/${role}`);
     } catch (err: any) {
-      setMessage(err?.response?.data?.message || "Erreur de connexion");
+      setMessage(err?.response?.data?.message || 'Erreur de connexion');
     }
   };
 
