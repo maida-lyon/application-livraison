@@ -1,15 +1,13 @@
 'use client';
+
 import { useEffect, useState } from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import { Icon } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import L from 'leaflet';
 
-// Fix Leaflet icons (sinon bug affichage)
-delete L.Icon.Default.prototype._getIconUrl;
-L.Icon.Default.mergeOptions({
-  iconRetinaUrl: require('leaflet/dist/images/marker-icon-2x.png'),
-  iconUrl: require('leaflet/dist/images/marker-icon.png'),
-  shadowUrl: require('leaflet/dist/images/marker-shadow.png'),
+const customIcon = new Icon({
+  iconUrl: 'https://unpkg.com/leaflet@1.9.3/dist/images/marker-icon.png',
+  iconSize: [25, 41],
 });
 
 export default function TrackingMap() {
@@ -32,8 +30,9 @@ export default function TrackingMap() {
     >
       <TileLayer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        attribution="© OpenStreetMap"
       />
-      <Marker position={[latitude, longitude] as [number, number]}>
+      <Marker position={[latitude, longitude]} icon={customIcon}>
         <Popup>Position actuelle</Popup>
       </Marker>
     </MapContainer>

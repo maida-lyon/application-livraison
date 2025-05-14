@@ -1,22 +1,22 @@
-'use client'
+'use client';
 
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
-import { Icon } from 'leaflet'
-import 'leaflet/dist/leaflet.css'
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import { Icon } from 'leaflet';
+import 'leaflet/dist/leaflet.css';
 
 const customIcon = new Icon({
   iconUrl: 'https://unpkg.com/leaflet@1.9.3/dist/images/marker-icon.png',
   iconSize: [25, 41],
-})
+});
 
 export default function TrackingMapClient({
   latitude = 45.75,
   longitude = 4.85,
   statut = 'préparée',
 }: {
-  latitude?: number
-  longitude?: number
-  statut?: string
+  latitude?: number;
+  longitude?: number;
+  statut?: string;
 }) {
   return (
     <div className="mt-6 w-full h-64">
@@ -37,5 +37,5 @@ export default function TrackingMapClient({
         </Marker>
       </MapContainer>
     </div>
-  )
+  );
 }
