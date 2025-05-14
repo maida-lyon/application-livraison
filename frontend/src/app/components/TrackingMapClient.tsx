@@ -1,45 +1,32 @@
-'use client'
+'use client';
+import Link from 'next/link';
 
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
-import { Icon } from 'leaflet';
-import 'leaflet/dist/leaflet.css';
-
-const customIcon = new Icon({
-  iconUrl: 'https://unpkg.com/leaflet@1.9.3/dist/images/marker-icon.png',
-  iconSize: [25, 41],
-  iconAnchor: [12, 41],
-  popupAnchor: [1, -34],
-  shadowUrl: 'https://unpkg.com/leaflet@1.9.3/dist/images/marker-shadow.png',
-  shadowSize: [41, 41],
-});
-
-export default function TrackingMap({
-  latitude = 45.75,
-  longitude = 4.85,
-  statut = 'Préparée',
-}: {
-  latitude?: number;
-  longitude?: number;
-  statut?: string;
-}) {
+export default function Home() {
   return (
-    <div className="mt-6 w-full h-64">
-      <MapContainer
-        center={[latitude, longitude]}
-        zoom={13}
-        scrollWheelZoom={false}
-        style={{ height: '100%', width: '100%' }}
-      >
-        <TileLayer
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          attribution="© OpenStreetMap"
-        />
-        <Marker position={[latitude, longitude]} icon={customIcon}>
-          <Popup>
-            Transporteur – Statut : <strong>{statut}</strong>
-          </Popup>
-        </Marker>
-      </MapContainer>
+    <div className="min-h-screen flex items-center justify-center bg-black text-white px-6">
+      <div className="max-w-md w-full space-y-6 text-center">
+        <h1 className="text-4xl font-bold">Bienvenue sur DeliverApp</h1>
+        <p className="text-gray-300 text-sm">
+          Freight, Distribution, QR code, Tracking, IA de validation… Tout en un.
+        </p>
+
+        <div className="flex flex-col gap-3">
+          <Link href="/register">
+            <button className="w-full bg-white text-black py-3 rounded-xl hover:bg-gray-300 transition">
+              Créer un compte
+            </button>
+          </Link>
+          <Link href="/login">
+            <button className="w-full border border-white py-3 rounded-xl hover:bg-white hover:text-black transition">
+              Se connecter
+            </button>
+          </Link>
+        </div>
+
+        <div className="text-xs text-gray-500 mt-4">
+          Accès sécurisé par rôle (admin / donneur / transporteur)
+        </div>
+      </div>
     </div>
   );
 }

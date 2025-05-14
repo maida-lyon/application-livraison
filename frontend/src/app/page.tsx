@@ -1,57 +1,31 @@
-"use client";
-import { useState } from "react";
-import axios from "axios";
-import { useRouter } from "next/navigation";
+'use client';
+import Link from 'next/link';
 
-const API = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
-
-export default function LoginPage() {
-  const router = useRouter();
-  const [form, setForm] = useState({ email: "", motdepasse: "" });
-  const [message, setMessage] = useState("");
-
-  const handleChange = (e: any) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
-
-  const handleLogin = async () => {
-    try {
-      const res = await axios.post(`${API}/api/users/login`, form, {
-        withCredentials: true,
-      });
-
-      const { role } = res.data;
-      router.push(`/dashboard/${role}`);
-    } catch (err: any) {
-      setMessage(err?.response?.data?.message || "Erreur de connexion");
-    }
-  };
-
+export default function Home() {
   return (
-    <div className="min-h-screen flex flex-col justify-center items-center bg-white text-black p-6">
-      <h1 className="text-2xl font-bold mb-6">Connexion</h1>
-      <div className="w-full max-w-sm space-y-4">
-        <input
-          name="email"
-          type="email"
-          placeholder="Email"
-          onChange={handleChange}
-          className="border px-4 py-2 w-full rounded"
-        />
-        <input
-          name="motdepasse"
-          type="password"
-          placeholder="Mot de passe"
-          onChange={handleChange}
-          className="border px-4 py-2 w-full rounded"
-        />
-        {message && <p className="text-red-600 text-sm">{message}</p>}
-        <button
-          onClick={handleLogin}
-          className="w-full bg-black text-white py-3 rounded hover:bg-gray-800"
-        >
-          Se connecter
-        </button>
+    <div className="min-h-screen flex items-center justify-center bg-black text-white px-6">
+      <div className="max-w-md w-full space-y-6 text-center">
+        <h1 className="text-4xl font-bold">Bienvenue sur DeliverApp</h1>
+        <p className="text-gray-300 text-sm">
+          Freight, Distribution, QR code, Tracking, IA de validation… Tout en un.
+        </p>
+
+        <div className="flex flex-col gap-3">
+          <Link href="/register">
+            <button className="w-full bg-white text-black py-3 rounded-xl hover:bg-gray-300 transition">
+              Créer un compte
+            </button>
+          </Link>
+          <Link href="/login">
+            <button className="w-full border border-white py-3 rounded-xl hover:bg-white hover:text-black transition">
+              Se connecter
+            </button>
+          </Link>
+        </div>
+
+        <div className="text-xs text-gray-500 mt-4">
+          Accès sécurisé par rôle (admin / donneur / transporteur)
+        </div>
       </div>
     </div>
   );

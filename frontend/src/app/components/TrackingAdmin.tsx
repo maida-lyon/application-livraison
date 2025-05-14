@@ -21,10 +21,7 @@ export default function TrackingAdminMap() {
       zoom={12}
       style={{ height: '300px', width: '100%' }}
     >
-      <TileLayer
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        attribution="© OpenStreetMap"
-      />
+      <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
       {missions.map((m) => (
         <Marker key={m.id} position={[m.lat, m.lng]} icon={customIcon}>
           <Popup>{m.statut}</Popup>

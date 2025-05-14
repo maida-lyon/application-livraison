@@ -1,4 +1,4 @@
-"use client";
+'use client';
 import { useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
@@ -29,13 +29,29 @@ export default function LoginPage() {
 
   return (
     <div className="min-h-screen flex flex-col justify-center items-center bg-white text-black p-6">
-      <h1 className="text-2xl font-bold mb-6">Se connecter</h1>
-
+      <h1 className="text-2xl font-bold mb-6">Connexion</h1>
       <div className="w-full max-w-sm space-y-4">
-        <input name="email" type="email" placeholder="Email" onChange={handleChange} className="input" />
-        <input name="motdepasse" type="password" placeholder="Mot de passe" onChange={handleChange} className="input" />
-        {message && <p className="text-sm text-red-600">{message}</p>}
-        <button onClick={handleLogin} className="w-full bg-black text-white py-3 rounded hover:bg-gray-800">Connexion</button>
+        <input
+          name="email"
+          type="email"
+          placeholder="Email"
+          onChange={handleChange}
+          className="border px-4 py-2 w-full rounded"
+        />
+        <input
+          name="motdepasse"
+          type="password"
+          placeholder="Mot de passe"
+          onChange={handleChange}
+          className="border px-4 py-2 w-full rounded"
+        />
+        {message && <p className="text-red-600 text-sm">{message}</p>}
+        <button
+          onClick={handleLogin}
+          className="w-full bg-black text-white py-3 rounded hover:bg-gray-800"
+        >
+          Se connecter
+        </button>
       </div>
     </div>
   );

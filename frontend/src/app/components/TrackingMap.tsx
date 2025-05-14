@@ -23,15 +23,12 @@ export default function TrackingMap() {
 
   return (
     <MapContainer
-      center={[latitude, longitude] as [number, number]}
+      center={[latitude, longitude]}
       zoom={13}
       scrollWheelZoom={false}
       style={{ height: '400px', width: '100%' }}
     >
-      <TileLayer
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        attribution="© OpenStreetMap"
-      />
+      <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
       <Marker position={[latitude, longitude]} icon={customIcon}>
         <Popup>Position actuelle</Popup>
       </Marker>
