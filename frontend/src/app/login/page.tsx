@@ -3,7 +3,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 
-const API = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api';
+const API = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
 
 export default function LoginPage() {
   const router = useRouter();
@@ -16,9 +16,9 @@ export default function LoginPage() {
 
   const handleLogin = async () => {
     try {
-      const res = await axios.post(`${API}/users/login`, form, {
-        withCredentials: true,
-      });
+      const res = await axios.post(`${API}/api/users/login`, form, {
+  withCredentials: true,
+});
 
       const { role } = res.data;
       router.push(`/dashboard/${role}`);
